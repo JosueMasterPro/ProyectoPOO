@@ -5,6 +5,10 @@
  */
 package Juego;
 
+/**
+ *
+ * @author Ñangie Reyes
+ */
 public class Main extends javax.swing.JFrame {
 
     /**
@@ -31,16 +35,13 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Menu");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(700, 700));
         setMinimumSize(new java.awt.Dimension(700, 700));
         setName("frameMainMenu"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(706, 740));
         setResizable(false);
         setSize(new java.awt.Dimension(700, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/play-hover.png"))); // NOI18N
-        jLabelPlay.setText("Play");
         jLabelPlay.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelPlay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -71,15 +72,11 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPlayMouseClicked
-        /*Nivel nivel1 = new Nivel();
+        Nivel nivel1 = new Nivel();
         
         this.dispose();
         
-        nivel1.setVisible(true);*/
-        
-        Juego Juego=new Juego();
-        this.dispose();
-        Juego.setVisible(true);
+        nivel1.setVisible(true);
     }//GEN-LAST:event_jLabelPlayMouseClicked
 
     private void jLabelQuitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelQuitMouseClicked

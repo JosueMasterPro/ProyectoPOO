@@ -5,20 +5,228 @@
  */
 package Juego;
 
-import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.util.Random;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 
-public class Nivel extends javax.swing.JFrame {  
+public class Nivel extends javax.swing.JFrame {
+
+    int puntos = 0;
+    int posicionCubeta = 2; // del 0 al 3
+    boolean realizado = false;
+
+    // Interfaz Grafica
+    Gota gota1;
+    Gota gota2;
+    Gota gota3;
+    Gota gota4;
+    Cubeta cubeta;
 
     public Nivel() {
         initComponents();
-        // setFont();
+
+        this.gota1 = new Gota(this.jLabelGota1);
+        this.gota2 = new Gota(this.jLabelGota2);
+        this.gota3 = new Gota(this.jLabelGota3);
+        this.gota4 = new Gota(this.jLabelGota4);
+        this.cubeta = new Cubeta(this.jLabelBucket);
+        ImageIcon Fondo=new ImageIcon(getClass().getResource("/Texetura/CORAZON VIDAS.png"));
+        ImageIcon icono=new ImageIcon(Fondo.getImage().getScaledInstance(Vida1.getWidth(), Vida1.getHeight(), Image.SCALE_DEFAULT));
+        Vida1.setIcon(icono);
+        Vida2.setIcon(icono);
+        Vida3.setIcon(icono);
+    }
+    /**
+     * Mueve las gotas N cantidad de pixeles hacia abajo
+     * @param pixeles - cantidad de pixeles a bajar
+     */
+    public void moverGotasEnY(int pixeles) {
+
+        gota1.desplazarEnY(pixeles);
+        gota2.desplazarEnY(pixeles);
+        gota3.desplazarEnY(pixeles);
+        gota4.desplazarEnY(pixeles);
     }
     
-    private void setFont() {
-        // this.gota1.setFont(new Font("Machine Gunk", Font.BOLD, 20));
+    /*
+    *   Genera un numero aleatorio
+    */
+    private int numeroAleatorio(int numeroMaximo) {
+        Random aleatorio = new Random();
+        int numeroAleatorio = aleatorio.nextInt(numeroMaximo);
+        
+        return numeroAleatorio;
+    }
+
+    /*
+    *   Genera la suma para la cubeta y setea los valores a las gotas
+    */
+    int respuesta=0;
+    public void generarValores() {
+        int Operacion=numeroAleatorio(3)+1;
+              
+        int valor1 = 0;
+        int valor2 = 0;
+        if(Operacion == 1){
+            valor1 = numeroAleatorio(50);
+            valor2 = numeroAleatorio(50);
+            respuesta = valor1 + valor2;
+            this.cubeta.setText(valor1 + " + " + valor2);
+        }
+        if(Operacion == 2){
+            valor1 = numeroAleatorio(50);
+            valor2 = numeroAleatorio(50);
+            if(valor1<=valor2){
+                respuesta = valor2 - valor1;
+                this.cubeta.setText(valor2 + " - " + valor1);
+            }
+            else{
+                respuesta = valor1 - valor2;
+                this.cubeta.setText(valor1 + " - " + valor2);
+            }
+        }
+        if(Operacion == 3){
+             valor1 = numeroAleatorio(10);
+             valor2 = numeroAleatorio(10);
+            respuesta = valor1 * valor2;
+            this.cubeta.setText(valor1 + " * " + valor2);
+        }
+        if(Operacion == 4){
+            valor1 = numeroAleatorio(50);
+            valor2 = numeroAleatorio(50);
+            int x=0;
+            x=valor1*valor2;
+            respuesta = x / valor2;
+            this.cubeta.setText(valor1 + " / " + valor2);
+        }
+        int gotaAleatoria = numeroAleatorio(3)+1;
+        this.posicionCubeta = 2;
+        
+        switch(gotaAleatoria) {
+            case 1:
+                gota1.setRespuesta(respuesta,true);
+                gota2.setRespuesta(respuesta+10,false);
+                gota3.setRespuesta(respuesta-10,false);
+                gota4.setRespuesta(respuesta+20,false);
+                break;
+            case 2:
+                gota2.setRespuesta(respuesta,true);
+
+                gota1.setRespuesta(respuesta+10,false);                
+                gota3.setRespuesta(respuesta-10,false);
+                gota4.setRespuesta(respuesta+20,false);
+                break;
+            case 3:
+                gota3.setRespuesta(respuesta,true);
+
+                gota1.setRespuesta(respuesta+10,false);
+                gota2.setRespuesta(respuesta-10,false);
+                gota4.setRespuesta(respuesta+20,false);
+                break;
+            case 4:
+                gota4.setRespuesta(respuesta,true);
+
+                gota1.setRespuesta(respuesta+10,false);
+                gota2.setRespuesta(respuesta-10,false);
+                gota3.setRespuesta(respuesta+20,false);
+                break;
+        }
+        this.cubeta.mover(this.posicionCubeta);
+        
     }
     
+    /*
+    *   Verifica la posicion de la cubeta para saber si la respuesta es correcta,
+    *   tambien agrega los puntos y actualiza el jLabelPuntos
+    */
+    int x=3;
+    int corazones=0;
+    public void vidas(int corazones){
+        if(corazones==1){
+                        Vida3.setVisible(false);
+                    }
+                    else if(corazones==2){
+                        Vida2.setVisible(false);
+                    }
+                    else if(corazones==3){
+                        Vida1.setVisible(false);
+                    }
+    }
+    
+    
+    public void verificarRespuesta() {
+        
+        switch(this.posicionCubeta) {
+            case 0:
+                if (gota1.getEsLaRespuesta()) {
+                    puntos++;
+                }
+                else{
+                    x--;
+                    corazones++;
+                    vidas(corazones);
+                    JOptionPane.showMessageDialog(this, "Tienes " + x +" Intentos mas");
+                     
+                }
+                break;
+            case 1:
+                if (gota2.getEsLaRespuesta()) {
+                    puntos++;
+                }
+                else{
+                    x--;
+                    corazones++;
+                    vidas(corazones);
+                    JOptionPane.showMessageDialog(this, "Tienes " + x +" Intentos mas");
+                }
+                break;
+            case 2:
+                if (gota3.getEsLaRespuesta()) {
+                    puntos++;
+                    
+                }
+                else{
+                    x--;
+                    corazones++;
+                    vidas(corazones);
+                    JOptionPane.showMessageDialog(this, "Tienes " + x +" Intentos mas");
+                }
+                break;
+            case 3:
+                if (gota4.getEsLaRespuesta()) {
+                    puntos++;
+                    
+                }
+                else{
+                    x--;
+                    corazones++;
+                    vidas(corazones);
+                    JOptionPane.showMessageDialog(this, "Tienes " + x +" Intentos mas");
+                }
+                break;
+        }
+        this.jLabelPuntos.setText("Puntos: " + puntos);
+        if(x==0){
+            int op= JOptionPane.showConfirmDialog(this, "¿Deseas Reintentarlo?", "Reinicio", YES_NO_OPTION);
+                if(op==JOptionPane.YES_OPTION){
+                    x=3;
+                    puntos=0;
+                    corazones=0;
+                    Vida1.setVisible(true);
+                    Vida2.setVisible(true);
+                    Vida3.setVisible(true);
+                }
+                else{
+                    Main Main=new Main();    
+                    this.dispose();
+                    Main.setVisible(true);
+                }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,28 +237,89 @@ public class Nivel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        gota1 = new javax.swing.JLabel();
+        Vida1 = new javax.swing.JLabel();
+        Vida2 = new javax.swing.JLabel();
+        Vida3 = new javax.swing.JLabel();
+        LABLEVIDA = new javax.swing.JLabel();
+        jLabelBucket = new javax.swing.JLabel();
+        jLabelGota1 = new javax.swing.JLabel();
+        jLabelGota2 = new javax.swing.JLabel();
+        jLabelGota3 = new javax.swing.JLabel();
+        jLabelGota4 = new javax.swing.JLabel();
+        jLabelPuntos = new javax.swing.JLabel();
         jLabelBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(700, 700));
+        setTitle("Rainy Math");
         setMinimumSize(new java.awt.Dimension(700, 700));
-        setPreferredSize(new java.awt.Dimension(706, 740));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        gota1.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
-        gota1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/drop.png"))); // NOI18N
-        gota1.setText("20");
-        gota1.setToolTipText("");
-        gota1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        gota1.setFocusable(false);
-        gota1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(gota1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+        Vida1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/CORAZON VIDAS.png"))); // NOI18N
+        getContentPane().add(Vida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 50, 40));
 
-        jLabelBackground.setForeground(new java.awt.Color(0, 0, 0));
+        Vida2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/CORAZON VIDAS.png"))); // NOI18N
+        getContentPane().add(Vida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 50, 40));
+
+        Vida3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/CORAZON VIDAS.png"))); // NOI18N
+        getContentPane().add(Vida3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 50, 40));
+
+        LABLEVIDA.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        LABLEVIDA.setText("Vidas:");
+        getContentPane().add(LABLEVIDA, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 100, 40));
+
+        jLabelBucket.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabelBucket.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelBucket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/bucket.png"))); // NOI18N
+        jLabelBucket.setText("00 + 00");
+        jLabelBucket.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabelBucket, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 480, 150, -1));
+
+        jLabelGota1.setFont(new java.awt.Font("Dialog", 0, 75)); // NOI18N
+        jLabelGota1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelGota1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/drop.png"))); // NOI18N
+        jLabelGota1.setText("0");
+        jLabelGota1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabelGota1.setFocusable(false);
+        jLabelGota1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabelGota1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 50, -1, -1));
+
+        jLabelGota2.setFont(new java.awt.Font("Dialog", 0, 75)); // NOI18N
+        jLabelGota2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/drop.png"))); // NOI18N
+        jLabelGota2.setText("0");
+        jLabelGota2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabelGota2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, -1, -1));
+
+        jLabelGota3.setFont(new java.awt.Font("Dialog", 0, 75)); // NOI18N
+        jLabelGota3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/drop.png"))); // NOI18N
+        jLabelGota3.setText("0");
+        jLabelGota3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabelGota3, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 50, -1, -1));
+
+        jLabelGota4.setFont(new java.awt.Font("Dialog", 0, 75)); // NOI18N
+        jLabelGota4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelGota4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/drop.png"))); // NOI18N
+        jLabelGota4.setText("0");
+        jLabelGota4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabelGota4.setFocusable(false);
+        jLabelGota4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabelGota4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, -1, -1));
+
+        jLabelPuntos.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        jLabelPuntos.setText("Puntos: 0");
+        getContentPane().add(jLabelPuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 160, 40));
+
         jLabelBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/level1.jpg"))); // NOI18N
-        jLabelBackground.setText("background");
         jLabelBackground.setMaximumSize(new java.awt.Dimension(700, 700));
         jLabelBackground.setMinimumSize(new java.awt.Dimension(700, 700));
         jLabelBackground.setPreferredSize(new java.awt.Dimension(700, 700));
@@ -58,6 +327,49 @@ public class Nivel extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /*
+    * Evento que agarra la fechas del teclado y mueve la cubeta
+    */
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        int nuevaPosicionCubeta = this.posicionCubeta;
+
+        // Flecha Derecha
+        if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
+            nuevaPosicionCubeta = this.posicionCubeta + 1;
+        }
+
+        // Flecha Izquierda
+        if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
+            nuevaPosicionCubeta = this.posicionCubeta - 1;
+        }
+
+        // Si se pasa 3
+        if (nuevaPosicionCubeta > 3) {
+            nuevaPosicionCubeta = 3;
+        }
+
+        // Si se pasa 0
+        if (nuevaPosicionCubeta < 0) {
+            nuevaPosicionCubeta = 0;
+        }
+
+        this.posicionCubeta = nuevaPosicionCubeta;
+
+        this.cubeta.mover(this.posicionCubeta);
+    }//GEN-LAST:event_formKeyPressed
+
+    /*
+    * Este seria el main del juego, comienza el juego a través de un thread
+    * el cual nos permite tener loops infinitos sin trabar el programa. 
+    */
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if (realizado == false) {
+            MainNivel nivel = new MainNivel(this);
+            realizado = true;
+            nivel.start();
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -96,7 +408,16 @@ public class Nivel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel gota1;
+    private javax.swing.JLabel LABLEVIDA;
+    private javax.swing.JLabel Vida1;
+    private javax.swing.JLabel Vida2;
+    private javax.swing.JLabel Vida3;
     private javax.swing.JLabel jLabelBackground;
+    private javax.swing.JLabel jLabelBucket;
+    private javax.swing.JLabel jLabelGota1;
+    private javax.swing.JLabel jLabelGota2;
+    private javax.swing.JLabel jLabelGota3;
+    private javax.swing.JLabel jLabelGota4;
+    private javax.swing.JLabel jLabelPuntos;
     // End of variables declaration//GEN-END:variables
 }

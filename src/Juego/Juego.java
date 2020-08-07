@@ -56,6 +56,7 @@ public class Juego extends javax.swing.JFrame {
    
     public Juego() {
         setTitle("Rainy Math");
+        setLocationRelativeTo(this);
         initComponents();
         ImageIcon Fondo=new ImageIcon(getClass().getResource("/Texetura/NUBES1.jpg"));
         ImageIcon icono=new ImageIcon(Fondo.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
@@ -65,53 +66,8 @@ public class Juego extends javax.swing.JFrame {
         ImageIcon iconon=new ImageIcon(Cubeta.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_DEFAULT));
         jLabel2.setIcon(iconon);
         LabelRespuesta.setVisible(false);
-        jLabel2.setLocation(250, 350);
-       /* new Thread(){
-            
-            public void run(){
-                jLabel2.setText(String.valueOf(A1)+" + " + String.valueOf(A2));
-                int Gotax=GotaLabel.getX();
-                int Gota1x=GotaLabel1.getX();
-                int Gota2x=GotaLabel2.getX();
-                int Gota3x=GotaLabel3.getX();
-                int y=1;
-                LabelPuntaje.setText(String.valueOf(Puntos));
-                LabelRespuesta.setText(String.valueOf(A3));
-                while(true){
-                    int Resultado;
-                    Resultado=A1+A2;
-                    botones(A3,Resultado);
-                    y=y+4;
-                    if(y>=400){
-                       y=1; 
-                       Aleatorio();
-                    }
-                    
-                    if(Integer.valueOf(LabelRespuesta.getText())==Resultado){
-                        Puntos++;
-                        LabelPuntaje.setText(String.valueOf(Puntos));
-                        LabelRespuesta.setText("0");
-                        y=1;
-                        Aleatorio();
-                   }
-                   if(Funcion()==true){
-                       if(Integer.valueOf(GotaLabel.getText())==Resultado){
-                            Puntos++;
-                       }
-                   } 
-                    GotaLabel.setLocation(Gotax, y);
-                    GotaLabel1.setLocation(Gota1x, y);
-                    GotaLabel2.setLocation(Gota2x, y);
-                    GotaLabel3.setLocation(Gota3x, y);
-                    try {
-                        sleep(150);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        
-        }.start();*/
+        jLabel2.setLocation(jLabel2.getX(), jLabel2.getY());
+       
         
     }
 
@@ -258,6 +214,7 @@ public class Juego extends javax.swing.JFrame {
         getContentPane().add(LabelRespuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 144, 34, 26));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
@@ -266,14 +223,14 @@ public class Juego extends javax.swing.JFrame {
             if(jLabel2.getX()>=1){
             x=jLabel2.getX();
             x=x-5;
-            jLabel2.setLocation(x, 500);
+            jLabel2.setLocation(x, jLabel2.getY());
            }
         }
         if(evt.getKeyCode()==KeyEvent.VK_D){
             if(jLabel2.getX()<=519){
             x=jLabel2.getX();
             x=x+5;
-            jLabel2.setLocation(x, 500);
+            jLabel2.setLocation(x, jLabel2.getY());
             }
         }
     }//GEN-LAST:event_formKeyPressed
