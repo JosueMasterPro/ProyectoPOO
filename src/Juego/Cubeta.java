@@ -17,11 +17,11 @@ public class Cubeta {
     }
     
     public void mover(int posicion) {
-        int y = 480;
+        int y = 380;
                 
-        Point posicion1 = new Point(14, y);
-        Point posicion2 = new Point(189, y);
-        Point posicion3 = new Point(363, y);
+        Point posicion1 = new Point(10, y);
+        Point posicion2 = new Point(185, y);
+        Point posicion3 = new Point(359, y);
         Point posicion4 = new Point(538, y);
         
         switch(posicion) {
