@@ -40,8 +40,8 @@ public class Gotas extends Label {
         if (chocaEnX && chocaEnY) {
             return true;
         }
-        
-        return false;
-        
+        else{
+            return false;
+        }
     }
 }

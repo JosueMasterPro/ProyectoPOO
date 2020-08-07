@@ -21,16 +21,13 @@ public class MainNivel extends Thread {
     public void run() {
         int buenas;
         int velocidad = 5;
-        
 
         do {
 
             nivel.generarValores();
-
             while (true) {
 
                 nivel.moverGotasEnY(velocidad);
-
 
                 int posicionEnY = nivel.gota1.getPosicionEnY();
 

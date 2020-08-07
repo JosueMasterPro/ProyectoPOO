@@ -141,7 +141,6 @@ public class Nivel extends javax.swing.JFrame {
                 break;
             case 4:
                 gota4.setRespuesta(respuesta,true);
-
                 gota1.setRespuesta(respuesta+5,false);
                 gota2.setRespuesta(respuesta+4,false);
                 gota3.setRespuesta(respuesta+10,false);
@@ -232,7 +231,7 @@ public class Nivel extends javax.swing.JFrame {
         }
         this.jLabelPuntos.setText("Puntos: " + puntos);
         if(x==0){
-            int op= JOptionPane.showConfirmDialog(this, "¿Deseas Reintentarlo?", "Reinicio", YES_NO_OPTION);
+            int op = JOptionPane.showConfirmDialog(this, "¿Deseas Reintentarlo?", "Reinicio", YES_NO_OPTION);
                 if(op==JOptionPane.YES_OPTION){
                     x=6;
                     puntos=0;
