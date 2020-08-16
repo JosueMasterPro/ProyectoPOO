@@ -66,6 +66,11 @@ public class Gota {
         
         return posY;
     }
+    public int getPosicionEnX() {
+        int posX =  this.posicionActual.x;
+        
+        return posX;
+    }
 
     /*
     * Pone la variable esLaRespuesta en true y guarda la respuesta
@@ -74,22 +79,7 @@ public class Gota {
         this.numero = numero;
         this.esLaRespuesta = V;  
         this.resetPosition();
-    }
-    
-    /*
-    * Pone la variable esLaRespuesta en false y genera un numero aleatorio
-    */
-     /*public void setRespuestaIncorrecta() {
-        Random aleatorio = new Random();
-        int numeroMaximo = 50;
-        int numeroAleatorio = aleatorio.nextInt(numeroMaximo);
-
-        this.numero = numeroAleatorio;
-        this.esLaRespuesta = false;
-        
-        this.resetPosition();
-    }    */
-    
+    }  
     /*
     * Dice si la gota tiene la respuesta
     */

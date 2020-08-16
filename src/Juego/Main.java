@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Juego;
 
-/**
- *
- * @author Ñangie Reyes
- */
+
 public class Main extends javax.swing.JFrame {
 
     /**
@@ -51,11 +44,9 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(jLabelPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 260, 150));
 
         jLabelScore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/score.png"))); // NOI18N
-        jLabelScore.setText("score");
         getContentPane().add(jLabelScore, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 300, 150));
 
         jLabelQuit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/quit.png"))); // NOI18N
-        jLabelQuit.setText("quit");
         jLabelQuit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelQuitMouseClicked(evt);
@@ -72,11 +63,13 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPlayMouseClicked
-        Nivel nivel1 = new Nivel();
-        
+  /*      Nivel nivel1 = new Nivel();
         this.dispose();
-        
         nivel1.setVisible(true);
+*/
+        PrincipalNivel3 Nivel3=new PrincipalNivel3();
+        this.dispose();
+        Nivel3.setVisible(true);
     }//GEN-LAST:event_jLabelPlayMouseClicked
 
     private void jLabelQuitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelQuitMouseClicked
