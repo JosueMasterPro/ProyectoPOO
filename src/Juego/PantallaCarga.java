@@ -1,12 +1,12 @@
 
 package Juego;
 
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PantallaCarga extends javax.swing.JFrame {
-
     private boolean Realizado=false;
     public PantallaCarga() {
         initComponents();

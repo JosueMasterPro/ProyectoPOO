@@ -38,11 +38,14 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
     int puntos = 0;
     int posicionCubeta = 2; // del 0 al 3
     boolean realizado=false;
+    
+        AudioClip Musica1,Musica2;
+        
     //Constructor
     public PrincipalNivel3() {
         initComponents();
-        AudioClip Musica1;
         Musica1=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Electrodynamix.wav"));
+        Musica2=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/FALLA.wav"));
         Musica1.loop();
         
         this.gota1 = new Gota(this.jLabelGota1);
@@ -155,7 +158,7 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
     }
     
     int x=6;
-    public void verificarRespuesta() {
+    public void verificarRespuesta() throws InterruptedException {
         
         switch(this.posicionCubeta) {
             case 0:
@@ -164,6 +167,7 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
                 }
                 else{
                     
+                    Musica2.play();
                     JOptionPane.showMessageDialog(this, "La Respuesta era:"+ respuesta);
                      
                 }
@@ -174,7 +178,9 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
                 }
                 else{
                     
+                    Musica2.play();
                     JOptionPane.showMessageDialog(this, "La Respuesta era:"+ respuesta);
+                    
                 }
                 break;
             case 2:
@@ -183,6 +189,8 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
                     
                 }
                 else{
+                    
+                    Musica2.play();
                     
                     JOptionPane.showMessageDialog(this, "La Respuesta era:"+ respuesta);
                 }
@@ -193,6 +201,8 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
                     
                 }
                 else{
+                    
+                    Musica2.play();
                     JOptionPane.showMessageDialog(this, "La Respuesta era:"+ respuesta);
                 }
                 break;

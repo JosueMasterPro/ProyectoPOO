@@ -1,12 +1,18 @@
 
 package Juego;
 
+import java.applet.AudioClip;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 public class Carga extends Thread{
-    
+        AudioClip Musica1;
+        
+        public Carga(){
+        Musica1=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Espera.wav"));    
+        }
+        
      private int Aux=0;
     public PantallaCarga Pantalla;
     @Override
@@ -18,6 +24,7 @@ public class Carga extends Thread{
             
             switch(Aux){
                 case 1:
+                    Musica1.play();
                     Pantalla.IngresarTxt("Cargando.....");
                     break;
                 case 20:
@@ -32,9 +39,10 @@ public class Carga extends Thread{
                     Form1.setLocationRelativeTo(Pantalla);
                     Pantalla.setVisible(false);
                     Pantalla.dispose();
+                    Musica1.stop();
                     break;
             }
-            Thread.sleep(150);
+            Thread.sleep(200);
         }
            
         } catch (InterruptedException ex) {
