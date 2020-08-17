@@ -16,6 +16,11 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
+//Librerias para Musica
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import java.applet.AudioClip;
 
 
 
@@ -33,9 +38,13 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
     int puntos = 0;
     int posicionCubeta = 2; // del 0 al 3
     boolean realizado=false;
-    
+    //Constructor
     public PrincipalNivel3() {
         initComponents();
+        AudioClip Musica1;
+        Musica1=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Electrodynamix.wav"));
+        Musica1.loop();
+        
         this.gota1 = new Gota(this.jLabelGota1);
         this.gota2 = new Gota(this.jLabelGota2);
         this.gota3 = new Gota(this.jLabelGota3);
@@ -58,6 +67,9 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
     }    
 
     //Apartado para las clases
+    public void Mensaje(){
+        JOptionPane.showMessageDialog(this, "Disparale a la respuesta \ncorrecta, asi apagaras el fuego.\nUsa La C para Disparar");
+    }
      private int numeroAleatorio(int numeroMaximo) {
         Random aleatorio = new Random();
         int numeroAleatorio = aleatorio.nextInt(numeroMaximo);

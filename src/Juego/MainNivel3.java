@@ -14,18 +14,21 @@ public class MainNivel3 extends Thread {
     public MainNivel3(PrincipalNivel3 nivel) {
         this.nivel = nivel;
     }
-
+int Opcion=1;
     @Override
     public void run() {
         int buenas;
-
+        
         do {
 
             nivel.generarValores();
             while (true) {
 
                 int posicionEnX = nivel.Bala.getPosicionEnX();
-
+                if(Opcion==1){
+                    nivel.Mensaje();
+                    Opcion=2;
+                }
                 if (posicionEnX > 680) {
                    
                     break;
