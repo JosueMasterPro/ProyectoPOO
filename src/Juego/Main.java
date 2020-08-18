@@ -1,14 +1,16 @@
 
 package Juego;
 
+import java.applet.AudioClip;
+
 
 public class Main extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Main
-     */
+    
+    AudioClip Musica1;
     public Main() {
         initComponents();
+        Musica1=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Espera.wav"));
     }
 
     /**
@@ -73,7 +75,6 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelPlayMouseClicked
 
     private void jLabelQuitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelQuitMouseClicked
-
         System.exit(0);
     }//GEN-LAST:event_jLabelQuitMouseClicked
 

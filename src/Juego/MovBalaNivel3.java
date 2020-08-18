@@ -24,7 +24,11 @@ public class MovBalaNivel3 extends Thread {
                 x=x+20;
                 nivel.MoverBala(x);
                 if(x>800){
-                    nivel.verificarRespuesta();
+                    try {
+                        nivel.verificarRespuesta();
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(MovBalaNivel3.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     nivel.generarValores();
                     break;
                 }

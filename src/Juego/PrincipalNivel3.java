@@ -17,8 +17,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 //Librerias para Musica
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 import java.applet.AudioClip;
 
@@ -28,7 +26,7 @@ import java.applet.AudioClip;
 public class PrincipalNivel3 extends javax.swing.JFrame {
 
    
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     Gota gota1;
     Gota gota2;
     Gota gota3;
@@ -38,15 +36,17 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
     int puntos = 0;
     int posicionCubeta = 2; // del 0 al 3
     boolean realizado=false;
+    boolean Verdad=false;
     
-        AudioClip Musica1,Musica2;
+        AudioClip Nivel3,Falla,Correcto;
         
     //Constructor
     public PrincipalNivel3() {
         initComponents();
-        Musica1=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Electrodynamix.wav"));
-        Musica2=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/FALLA.wav"));
-        Musica1.loop();
+        Nivel3=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Nivel3.wav"));
+        Falla=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/FALLA.wav"));
+        Correcto=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Correcto.wav"));
+        Nivel3.loop();
         
         this.gota1 = new Gota(this.jLabelGota1);
         this.gota2 = new Gota(this.jLabelGota2);
@@ -61,6 +61,10 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         ImageIcon icono=new ImageIcon(Fondo.getImage().getScaledInstance(jLabelBackground.getWidth(), jLabelBackground.getHeight(), Image.SCALE_DEFAULT));
         jLabelBackground.setIcon(icono);
         
+        ImageIcon Personaje=new ImageIcon(getClass().getResource("/Texetura/LEOPERSONAJE8.png"));
+        ImageIcon ice=new ImageIcon(Personaje.getImage().getScaledInstance(jLabelBucket.getWidth(), jLabelBucket.getHeight(), Image.SCALE_DEFAULT));
+        jLabelBucket.setIcon(ice);
+        
         ImageIcon Imagen=new ImageIcon(getClass().getResource("/Texetura/drop.png"));
         ImageIcon icon=new ImageIcon(Imagen.getImage().getScaledInstance(jLabelGota1.getWidth(), jLabelGota1.getHeight(), Image.SCALE_DEFAULT));
         jLabelGota1.setIcon(icon);
@@ -71,7 +75,7 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
 
     //Apartado para las clases
     public void Mensaje(){
-        JOptionPane.showMessageDialog(this, "Disparale a la respuesta \ncorrecta, asi apagaras el fuego.\nUsa La C para Disparar");
+        JOptionPane.showMessageDialog(this, "Disparale a la respuesta \ncorrecta, asi apagaras el fuego.\nUsa La D para Disparar");
     }
      private int numeroAleatorio(int numeroMaximo) {
         Random aleatorio = new Random();
@@ -87,31 +91,35 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         int valor1 = 0;
         int valor2 = 0;
         if(Operacion == 1){
-            valor1 = numeroAleatorio(50);
-            valor2 = numeroAleatorio(50);
+            valor1 = numeroAleatorio(20);
+            valor2 = numeroAleatorio(20);
             respuesta = valor1 + valor2;
             this.cubeta.setText(valor1 + " + " + valor2);
+            jLabelBucket.setText(valor1 + " + " + valor2);
             this.LabelDisparo.setText(valor1 + " + " + valor2);
         }
         if(Operacion == 2){
-            valor1 = numeroAleatorio(50);
-            valor2 = numeroAleatorio(50);
+            valor1 = numeroAleatorio(20);
+            valor2 = numeroAleatorio(20);
             if(valor1<=valor2){
                 respuesta = valor2 - valor1;
                 this.cubeta.setText(valor2 + " - " + valor1);
+                jLabelBucket.setText(valor2 + " - " + valor1);
                 this.LabelDisparo.setText(valor2 + " - " + valor1);
             }
             else{
                 respuesta = valor1 - valor2;
                 this.cubeta.setText(valor1 + " - " + valor2);
+                jLabelBucket.setText(valor1 + " - " + valor2);
                 this.LabelDisparo.setText(valor1 + " - " + valor2);
             }
         }
         if(Operacion == 3){
-             valor1 = numeroAleatorio(10);
-             valor2 = numeroAleatorio(10);
+             valor1 = numeroAleatorio(12);
+             valor2 = numeroAleatorio(12);
             respuesta = valor1 * valor2;
             this.cubeta.setText(valor1 + " * " + valor2);
+            jLabelBucket.setText(valor1 + " * " + valor2);
             this.LabelDisparo.setText(valor1 + " * " + valor2);
         }
         if(Operacion == 4){
@@ -121,6 +129,7 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
             P=valor1*valor2;
             respuesta = P / valor2;
             this.cubeta.setText(P + " / " + valor2);
+            jLabelBucket.setText(P + " / " + valor2);
             this.LabelDisparo.setText(P + " / " + valor2);
         }
         int gotaAleatoria = numeroAleatorio(4)+1;
@@ -153,6 +162,7 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
                 gota3.setRespuesta(respuesta+10,false);
                 break;
         }
+        posicionCubeta=2;
         this.cubeta.mover(this.posicionCubeta);
         
     }
@@ -164,10 +174,11 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
             case 0:
                 if (gota1.getEsLaRespuesta()) {
                     puntos++;
+                    Correcto.play();
                 }
                 else{
                     
-                    Musica2.play();
+                    Falla.play();
                     JOptionPane.showMessageDialog(this, "La Respuesta era:"+ respuesta);
                      
                 }
@@ -175,10 +186,11 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
             case 1:
                 if (gota2.getEsLaRespuesta()) {
                     puntos++;
+                    Correcto.play();
                 }
                 else{
                     
-                    Musica2.play();
+                    Falla.play();
                     JOptionPane.showMessageDialog(this, "La Respuesta era:"+ respuesta);
                     
                 }
@@ -186,11 +198,11 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
             case 2:
                 if (gota3.getEsLaRespuesta()) {
                     puntos++;
-                    
+                    Correcto.play();
                 }
                 else{
                     
-                    Musica2.play();
+                    Falla.play();
                     
                     JOptionPane.showMessageDialog(this, "La Respuesta era:"+ respuesta);
                 }
@@ -198,11 +210,11 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
             case 3:
                 if (gota4.getEsLaRespuesta()) {
                     puntos++;
-                    
+                    Correcto.play();
                 }
                 else{
                     
-                    Musica2.play();
+                    Falla.play();
                     JOptionPane.showMessageDialog(this, "La Respuesta era:"+ respuesta);
                 }
                 break;
@@ -223,8 +235,11 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
     public void MoverBala(int x){
         LabelDisparo.setLocation(x, jLabelBucket.getY());
         if(LabelDisparo.getX() > 800){
-            LabelDisparo.setLocation(10,10);
+            MovBalaNivel3 nivel=new MovBalaNivel3(this);
+            LabelDisparo.setLocation(1,1);
             LabelDisparo.setVisible(false);
+            Verdad=false;
+            nivel.stop();
         }
     }    
     //fin de apartado para las clases
@@ -254,15 +269,17 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelBucket.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabelBucket.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelBucket.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelBucket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/LEOPERSONAJE8.png"))); // NOI18N
+        jLabelBucket.setText("00");
         jLabelBucket.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelBucket, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 160, 160));
+        jLabelBucket.setIconTextGap(0);
+        jLabelBucket.setInheritsPopupMenu(false);
+        getContentPane().add(jLabelBucket, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 150, 200));
 
         LabelDisparo.setBackground(new java.awt.Color(102, 102, 255));
         LabelDisparo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LabelDisparo.setText("SADHKAJ");
         LabelDisparo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(LabelDisparo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 90, 70));
 
@@ -272,19 +289,19 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         jLabelGota4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelGota4.setFocusable(false);
         jLabelGota4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelGota4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 530, 80, 130));
+        getContentPane().add(jLabelGota4, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 530, 80, 130));
 
         jLabelGota3.setFont(new java.awt.Font("Dialog", 0, 55)); // NOI18N
         jLabelGota3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/drop.png"))); // NOI18N
         jLabelGota3.setText("0");
         jLabelGota3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelGota3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 380, 80, 130));
+        getContentPane().add(jLabelGota3, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 380, 80, 130));
 
         jLabelGota1.setFont(new java.awt.Font("Dialog", 0, 55)); // NOI18N
         jLabelGota1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/drop.png"))); // NOI18N
         jLabelGota1.setText("0");
         jLabelGota1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelGota1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 30, 80, 130));
+        getContentPane().add(jLabelGota1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 30, 80, 130));
 
         jLabelGota2.setFont(new java.awt.Font("Dialog", 0, 55)); // NOI18N
         jLabelGota2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -293,7 +310,7 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         jLabelGota2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelGota2.setFocusable(false);
         jLabelGota2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelGota2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 200, 80, 130));
+        getContentPane().add(jLabelGota2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 200, 80, 130));
 
         jLabelPuntos.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabelPuntos.setText("Puntos: 0");
@@ -301,7 +318,7 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
 
         jLabelBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/level1.jpg"))); // NOI18N
         jLabelBackground.setPreferredSize(new java.awt.Dimension(1000, 700));
-        getContentPane().add(jLabelBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 990, 690));
+        getContentPane().add(jLabelBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 690));
 
         pack();
         setLocationRelativeTo(null);
@@ -309,24 +326,14 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_C) {
+        if(evt.getKeyCode()==KeyEvent.VK_D){
             MovBalaNivel3 nivel = new MovBalaNivel3(this);
-            switch(posicionCubeta){
-                case 0:LabelDisparo.setLocation(30,40);
-                    break;
-                case 1:LabelDisparo.setLocation(30,190);
-                    break;
-                case 2:LabelDisparo.setLocation(30,360);
-                    break;
-                case 3:LabelDisparo.setLocation(30,530);
-                    break; 
-            }
+            jLabelBucket.setLocation(jLabelBucket.getLocation());
             LabelDisparo.setVisible(true);
-            boolean Verdad=false;
             if (Verdad == false) {
-            Verdad = true;
-            nivel.start();
-        }
+                Verdad = true;
+                nivel.start();
+            }
         }
         if(evt.getKeyCode() == KeyEvent.VK_A){
             JOptionPane.showMessageDialog(this, jLabelBucket.getX()+" y "+jLabelBucket.getY());
