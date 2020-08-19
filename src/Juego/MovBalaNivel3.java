@@ -21,7 +21,7 @@ public class MovBalaNivel3 extends Thread {
         do {
             
             while(true){
-                x=x+20;
+                x=x+40;
                 nivel.MoverBala(x);
                 if(x>800){
                     try {

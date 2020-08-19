@@ -79,7 +79,7 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
 
     //Apartado para las clases
     public void Mensaje(){
-        JOptionPane.showMessageDialog(this, "Disparale a la respuesta \ncorrecta, asi apagaras el fuego.\nUsa La D para Disparar");
+        JOptionPane.showMessageDialog(this, "Disparale a la respuesta \ncorrecta, asi apagaras el fuego.\nUsa la D para Disparar");
     }
      private int numeroAleatorio(int numeroMaximo) {
         Random aleatorio = new Random();
@@ -239,7 +239,6 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
     public void MoverBala(int x){
         LabelDisparo.setLocation(x, jLabelBucket.getY());
         if(LabelDisparo.getX() > 800){
-            MovBalaNivel3 nivel=new MovBalaNivel3(this);
             LabelDisparo.setLocation(1,1);
             LabelDisparo.setVisible(false);
             Verdad=false;
@@ -295,19 +294,19 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         jLabelGota4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelGota4.setFocusable(false);
         jLabelGota4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelGota4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 530, 80, 130));
+        getContentPane().add(jLabelGota4, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 530, 100, 130));
 
         jLabelGota3.setFont(new java.awt.Font("Dialog", 0, 55)); // NOI18N
         jLabelGota3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/drop.png"))); // NOI18N
         jLabelGota3.setText("0");
         jLabelGota3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelGota3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 380, 80, 130));
+        getContentPane().add(jLabelGota3, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 380, 100, 130));
 
         jLabelGota1.setFont(new java.awt.Font("Dialog", 0, 55)); // NOI18N
         jLabelGota1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/drop.png"))); // NOI18N
         jLabelGota1.setText("0");
         jLabelGota1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelGota1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 30, 80, 130));
+        getContentPane().add(jLabelGota1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 30, 100, 130));
 
         jLabelGota2.setFont(new java.awt.Font("Dialog", 0, 55)); // NOI18N
         jLabelGota2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -316,7 +315,7 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         jLabelGota2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelGota2.setFocusable(false);
         jLabelGota2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelGota2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 200, 80, 130));
+        getContentPane().add(jLabelGota2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 200, 100, 130));
 
         jLabelPuntos.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabelPuntos.setText("Puntos: 0");
