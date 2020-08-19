@@ -41,6 +41,8 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         AudioClip Nivel3,Falla,Correcto;
         
     //Constructor
+        ImageIcon Humo;
+        ImageIcon icon;
     public PrincipalNivel3() {
         initComponents();
         Nivel3=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Nivel3.wav"));
@@ -66,7 +68,7 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         jLabelBucket.setIcon(ice);
         
         ImageIcon Imagen=new ImageIcon(getClass().getResource("/Texetura/elementos/fuego4.png"));
-        ImageIcon icon=new ImageIcon(Imagen.getImage().getScaledInstance(jLabelGota1.getWidth(), jLabelGota1.getHeight(), Image.SCALE_DEFAULT));
+         icon=new ImageIcon(Imagen.getImage().getScaledInstance(jLabelGota1.getWidth(), jLabelGota1.getHeight(), Image.SCALE_DEFAULT));
         jLabelGota1.setIcon(icon);
         jLabelGota2.setIcon(icon);
         jLabelGota3.setIcon(icon);
@@ -75,6 +77,10 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         ImageIcon Disparo=new ImageIcon(getClass().getResource("/Texetura/elementos/agua1.png"));
         ImageIcon Bala=new ImageIcon(Disparo.getImage().getScaledInstance(LabelDisparo.getWidth(), LabelDisparo.getHeight(), Image.SCALE_DEFAULT));
         LabelDisparo.setIcon(Bala);
+        
+        ImageIcon Fumado=new ImageIcon(getClass().getResource("/Texetura/elementos/humo4.png"));
+        Humo=new ImageIcon(Fumado.getImage().getScaledInstance(LabelDisparo.getWidth(), LabelDisparo.getHeight(), Image.SCALE_DEFAULT));
+        
     }    
 
     //Apartado para las clases
@@ -179,7 +185,17 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
                 if (gota1.getEsLaRespuesta()) {
                     puntos++;
                     Correcto.play();
+                    jLabelGota1.setIcon(Humo);
+                    jLabelGota2.setIcon(null);
+                    jLabelGota3.setIcon(null);
+                    jLabelGota4.setIcon(null);
+                    Thread.sleep(200);
+                    jLabelGota1.setIcon(icon);
+                    jLabelGota2.setIcon(icon);
+                    jLabelGota3.setIcon(icon);
+                    jLabelGota4.setIcon(icon);
                 }
+                
                 else{
                     
                     Falla.play();
@@ -191,6 +207,15 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
                 if (gota2.getEsLaRespuesta()) {
                     puntos++;
                     Correcto.play();
+                    jLabelGota1.setIcon(null);
+                    jLabelGota2.setIcon(Humo);
+                    jLabelGota3.setIcon(null);
+                    jLabelGota4.setIcon(null);
+                    Thread.sleep(200);
+                    jLabelGota1.setIcon(icon);
+                    jLabelGota2.setIcon(icon);
+                    jLabelGota3.setIcon(icon);
+                    jLabelGota4.setIcon(icon);
                 }
                 else{
                     
@@ -203,6 +228,15 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
                 if (gota3.getEsLaRespuesta()) {
                     puntos++;
                     Correcto.play();
+                    jLabelGota1.setIcon(null);
+                    jLabelGota2.setIcon(null);
+                    jLabelGota3.setIcon(Humo);
+                    jLabelGota4.setIcon(null);
+                    Thread.sleep(200);
+                    jLabelGota1.setIcon(icon);
+                    jLabelGota2.setIcon(icon);
+                    jLabelGota3.setIcon(icon);
+                    jLabelGota4.setIcon(icon);
                 }
                 else{
                     
@@ -215,6 +249,15 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
                 if (gota4.getEsLaRespuesta()) {
                     puntos++;
                     Correcto.play();
+                    jLabelGota1.setIcon(null);
+                    jLabelGota2.setIcon(null);
+                    jLabelGota3.setIcon(null);
+                    jLabelGota4.setIcon(Humo);
+                    Thread.sleep(200);
+                    jLabelGota1.setIcon(icon);
+                    jLabelGota2.setIcon(icon);
+                    jLabelGota3.setIcon(icon);
+                    jLabelGota4.setIcon(icon);
                 }
                 else{
                     
@@ -239,9 +282,11 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
     public void MoverBala(int x){
         LabelDisparo.setLocation(x, jLabelBucket.getY());
         if(LabelDisparo.getX() > 800){
+            MovBalaNivel3 bala=new MovBalaNivel3(this);
             LabelDisparo.setLocation(1,1);
             LabelDisparo.setVisible(false);
             Verdad=false;
+            bala.interrupt();
         }
     }    
     //fin de apartado para las clases
