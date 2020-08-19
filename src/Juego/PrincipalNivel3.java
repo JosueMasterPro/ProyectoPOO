@@ -283,6 +283,8 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         getContentPane().add(jLabelBucket, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 150, 200));
 
         LabelDisparo.setBackground(new java.awt.Color(102, 102, 255));
+        LabelDisparo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        LabelDisparo.setForeground(new java.awt.Color(255, 255, 102));
         LabelDisparo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelDisparo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(LabelDisparo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 90, 70));
