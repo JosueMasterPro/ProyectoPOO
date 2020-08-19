@@ -21,7 +21,7 @@ public class MainNivel extends Thread {
     public void run() {
         int buenas;
         int velocidad = 5;
-
+        int pos;
         do {
 
             nivel.generarValores();
@@ -30,10 +30,30 @@ public class MainNivel extends Thread {
                 nivel.moverGotasEnY(velocidad);
 
                 int posicionEnY = nivel.gota1.getPosicionEnY();
-
+                pos=nivel.Posicion();
                 if (posicionEnY > 426) {
                     nivel.verificarRespuesta();
-                    velocidad+=0.75;
+                    switch(pos){
+                        case 0:
+                            if(nivel.gota1.getEsLaRespuesta()){
+                                velocidad+=2;
+                            }
+                        break;
+                        case 1:
+                            if(nivel.gota2.getEsLaRespuesta()){
+                                    velocidad+=2;
+                                }
+                        break;
+                        case 2:
+                            if(nivel.gota3.getEsLaRespuesta()){
+                                velocidad+=2;
+                            }
+                            break;
+                        case 3:
+                            if(nivel.gota4.getEsLaRespuesta()){
+                                velocidad+=2;
+                                }
+                    }
                     break;
                 }
 
@@ -46,8 +66,10 @@ public class MainNivel extends Thread {
             }
             
             buenas = nivel.puntos;
-        } while (buenas != 10);
+        } while (buenas != 2);
         nivel.dispose();
-        Main.setVisible(true);
+        nivel.PararMusica();
+        PrincipalNivel3 Nivel3 = new PrincipalNivel3();
+        Nivel3.setVisible(true);
     }
 }

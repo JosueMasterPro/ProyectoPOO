@@ -57,20 +57,24 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         LabelDisparo.setVisible(false);
         this.setSize(1000, 740);
         jLabelBackground.setSize(1000, 740);
-        ImageIcon Fondo=new ImageIcon(getClass().getResource("/Texetura/level1.jpg"));
+        ImageIcon Fondo=new ImageIcon(getClass().getResource("/Texetura/Fondos/Fondos Nivel 3/Fondo Nivel 3.png"));
         ImageIcon icono=new ImageIcon(Fondo.getImage().getScaledInstance(jLabelBackground.getWidth(), jLabelBackground.getHeight(), Image.SCALE_DEFAULT));
         jLabelBackground.setIcon(icono);
         
-        ImageIcon Personaje=new ImageIcon(getClass().getResource("/Texetura/LEOPERSONAJE8.png"));
+        ImageIcon Personaje=new ImageIcon(getClass().getResource("/Texetura/Fondos/Personaje/personaje7.png"));
         ImageIcon ice=new ImageIcon(Personaje.getImage().getScaledInstance(jLabelBucket.getWidth(), jLabelBucket.getHeight(), Image.SCALE_DEFAULT));
         jLabelBucket.setIcon(ice);
         
-        ImageIcon Imagen=new ImageIcon(getClass().getResource("/Texetura/drop.png"));
+        ImageIcon Imagen=new ImageIcon(getClass().getResource("/Texetura/elementos/fuego4.png"));
         ImageIcon icon=new ImageIcon(Imagen.getImage().getScaledInstance(jLabelGota1.getWidth(), jLabelGota1.getHeight(), Image.SCALE_DEFAULT));
         jLabelGota1.setIcon(icon);
         jLabelGota2.setIcon(icon);
         jLabelGota3.setIcon(icon);
         jLabelGota4.setIcon(icon);
+        
+        ImageIcon Disparo=new ImageIcon(getClass().getResource("/Texetura/elementos/agua1.png"));
+        ImageIcon Bala=new ImageIcon(Disparo.getImage().getScaledInstance(LabelDisparo.getWidth(), LabelDisparo.getHeight(), Image.SCALE_DEFAULT));
+        LabelDisparo.setIcon(Bala);
     }    
 
     //Apartado para las clases
@@ -239,7 +243,6 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
             LabelDisparo.setLocation(1,1);
             LabelDisparo.setVisible(false);
             Verdad=false;
-            nivel.stop();
         }
     }    
     //fin de apartado para las clases
@@ -269,7 +272,8 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelBucket.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelBucket.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelBucket.setForeground(new java.awt.Color(255, 255, 102));
         jLabelBucket.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelBucket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/LEOPERSONAJE8.png"))); // NOI18N
         jLabelBucket.setText("00");
@@ -289,19 +293,19 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         jLabelGota4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelGota4.setFocusable(false);
         jLabelGota4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelGota4, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 530, 80, 130));
+        getContentPane().add(jLabelGota4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 530, 80, 130));
 
         jLabelGota3.setFont(new java.awt.Font("Dialog", 0, 55)); // NOI18N
         jLabelGota3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/drop.png"))); // NOI18N
         jLabelGota3.setText("0");
         jLabelGota3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelGota3, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 380, 80, 130));
+        getContentPane().add(jLabelGota3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 380, 80, 130));
 
         jLabelGota1.setFont(new java.awt.Font("Dialog", 0, 55)); // NOI18N
         jLabelGota1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Texetura/drop.png"))); // NOI18N
         jLabelGota1.setText("0");
         jLabelGota1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelGota1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 30, 80, 130));
+        getContentPane().add(jLabelGota1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 30, 80, 130));
 
         jLabelGota2.setFont(new java.awt.Font("Dialog", 0, 55)); // NOI18N
         jLabelGota2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -310,7 +314,7 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         jLabelGota2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelGota2.setFocusable(false);
         jLabelGota2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabelGota2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 200, 80, 130));
+        getContentPane().add(jLabelGota2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 200, 80, 130));
 
         jLabelPuntos.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabelPuntos.setText("Puntos: 0");
@@ -328,7 +332,8 @@ public class PrincipalNivel3 extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_D){
             MovBalaNivel3 nivel = new MovBalaNivel3(this);
-            jLabelBucket.setLocation(jLabelBucket.getLocation());
+             this.cubeta.mover(this.posicionCubeta);
+            //jLabelBucket.setLocation(jLabelBucket.getLocation());
             LabelDisparo.setVisible(true);
             if (Verdad == false) {
                 Verdad = true;

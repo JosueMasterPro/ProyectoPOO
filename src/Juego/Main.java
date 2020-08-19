@@ -65,13 +65,21 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPlayMouseClicked
-  /*      Nivel nivel1 = new Nivel();
+        Nivel nivel1 = new Nivel();
         this.dispose();
         nivel1.setVisible(true);
-*/
-        PrincipalNivel3 Nivel3=new PrincipalNivel3();
+
+      /*  PrincipalNivel3 Nivel3=new PrincipalNivel3();
         this.dispose();
-        Nivel3.setVisible(true);
+        Nivel3.setVisible(true);*/
+        
+      /*level2 level2=new level2();
+      this.dispose();
+      level2.setVisible(true);*/
+        
+      /*Nivel4 nivel4=new Nivel4();
+      this.dispose();
+      nivel4.setVisible(true);*/
     }//GEN-LAST:event_jLabelPlayMouseClicked
 
     private void jLabelQuitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelQuitMouseClicked

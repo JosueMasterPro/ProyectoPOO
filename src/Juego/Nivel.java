@@ -5,6 +5,7 @@
  */
 package Juego;
 
+import java.applet.AudioClip;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.util.Random;
@@ -29,8 +30,17 @@ public class Nivel extends javax.swing.JFrame {
     ImageIcon Vida=new ImageIcon(getClass().getResource("/Texetura/CORAZONVIDAS3.png"));
     ImageIcon Corazon;
     
+     AudioClip Nivel1,Falla,Correcto;
+    
     public Nivel() {
         initComponents();
+        
+        Nivel1=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Nivel1.wav"));
+        Falla=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/FALLA.wav"));
+        Correcto=java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Correcto.wav"));
+        Nivel1.loop();
+        
+        
         this.Corazon = new ImageIcon(Vida.getImage().getScaledInstance(Vida1.getWidth(), Vida1.getHeight(), Image.SCALE_DEFAULT));    
         
         this.gota1 = new Gota(this.jLabelGota1);
@@ -78,20 +88,24 @@ public class Nivel extends javax.swing.JFrame {
     *   Genera la suma para la cubeta y setea los valores a las gotas
     */
     int respuesta=0;
+    public int Posicion(){
+        return posicionCubeta;
+    }
+    int valor1 = 0;
+    int valor2 = 0;
     public void generarValores() {
         int Operacion=numeroAleatorio(4)+1;
               
-        int valor1 = 0;
-        int valor2 = 0;
+        
         if(Operacion == 1){
-            valor1 = numeroAleatorio(50);
-            valor2 = numeroAleatorio(50);
+            valor1 = numeroAleatorio(20);
+            valor2 = numeroAleatorio(20);
             respuesta = valor1 + valor2;
             this.cubeta.setText(valor1 + " + " + valor2);
         }
         if(Operacion == 2){
-            valor1 = numeroAleatorio(50);
-            valor2 = numeroAleatorio(50);
+            valor1 = numeroAleatorio(20);
+            valor2 = numeroAleatorio(20);
             if(valor1<=valor2){
                 respuesta = valor2 - valor1;
                 this.cubeta.setText(valor2 + " - " + valor1);
@@ -176,6 +190,9 @@ public class Nivel extends javax.swing.JFrame {
             Vida1.setVisible(false);
             }
     }
+    public void PararMusica(){
+        Nivel1.stop();
+    }
     
     
     public void verificarRespuesta() {
@@ -184,67 +201,68 @@ public class Nivel extends javax.swing.JFrame {
             case 0:
                 if (gota1.getEsLaRespuesta()) {
                     puntos++;
+                    Correcto.play();
                 }
                 else{
                     x--;
                     corazones++;
                     vidas(corazones);
-                    JOptionPane.showMessageDialog(this, "Tienes " + x +" Intentos mas");
+                    Falla.play();
+                    JOptionPane.showMessageDialog(this, "La Respuesta era:"+respuesta);
                      
                 }
                 break;
             case 1:
                 if (gota2.getEsLaRespuesta()) {
                     puntos++;
+                    Correcto.play();
                 }
                 else{
                     x--;
+                    Falla.play();
                     corazones++;
                     vidas(corazones);
-                    JOptionPane.showMessageDialog(this, "Tienes " + x +" Intentos mas");
+                    JOptionPane.showMessageDialog(this, "La Respuesta era: "+respuesta);
                 }
                 break;
             case 2:
                 if (gota3.getEsLaRespuesta()) {
                     puntos++;
+                    Correcto.play();
                     
                 }
                 else{
                     x--;
                     corazones++;
+                    Falla.play();
                     vidas(corazones);
-                    JOptionPane.showMessageDialog(this, "Tienes " + x +" Intentos mas");
+                    JOptionPane.showMessageDialog(this, "La Respuesta era: "+respuesta);
                 }
                 break;
             case 3:
                 if (gota4.getEsLaRespuesta()) {
                     puntos++;
+                    Correcto.play();
                     
                 }
                 else{
                     x--;
+                    Falla.play();
                     corazones++;
                     vidas(corazones);
-                    JOptionPane.showMessageDialog(this, "Tienes " + x +" Intentos mas");
+                    JOptionPane.showMessageDialog(this, "La Respuesta era: "+respuesta);
                 }
                 break;
         }
         this.jLabelPuntos.setText("Puntos: " + puntos);
         if(x==0){
-            int op = JOptionPane.showConfirmDialog(this, "¿Deseas Reintentarlo?", "Reinicio", YES_NO_OPTION);
-                if(op==JOptionPane.YES_OPTION){
                     x=6;
                     puntos=0;
                     corazones=0;
                     Vida1.setVisible(true);
                     Vida2.setVisible(true);
                     Vida3.setVisible(true);
-                }
-                else{
-                    Main Main=new Main();    
-                    this.dispose();
-                    Main.setVisible(true);
-                }
+                
         }
     }
 
